@@ -80,6 +80,10 @@ namespace Joystick {
         }
 
 
+        public void UpdateJoystickCentre() {
+            defaultPos = Location;
+        }
+
         int Distance(Point p1, Point p2) {
             return Convert.ToInt32((float)Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2)));
         }
