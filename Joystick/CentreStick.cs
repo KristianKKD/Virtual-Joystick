@@ -19,16 +19,29 @@ namespace Joystick {
 
         public float maxDist = 63;
 
-        public CentreStick() {
+        Back b;
+
+        public CentreStick(Back myBack) {
+            b = myBack;
+            this.Parent = b;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.BackColor = Color.White;
+            this.BackColor = Color.Transparent;
+            this.Size = new Size((int)Math.Round(Parent.Width / 3f), (int)Math.Round(Parent.Height / 3f));
             SetDefaultPos();
         }
 
         async Task SetDefaultPos() {
-            await Task.Delay(100).ConfigureAwait(false);
-            defaultPos = Location;
+            await Task.Delay(100);
+            defaultPos = new Point((int)Math.Round(Parent.Width/2f - Width/2f), (int)Math.Round(Parent.Height/2f - Height/2f));
+            Centre();
+        }
+
+        protected override void OnPaint(PaintEventArgs pe) {
+            pe.Graphics.DrawImage(Properties.Resources.circle,
+                new Point(0, 0));
+
+            base.OnPaint(pe);
         }
 
         protected override void OnMouseEnter(EventArgs e) {
@@ -48,12 +61,8 @@ namespace Joystick {
         }
 
         protected override void OnMouseUp(MouseEventArgs e) {
-            active = false;
-            Location = defaultPos;
-            Location = defaultPos;
-            angle = 0;
-            distance = 0;
-            coords = new Point(0, 0);
+            Centre();
+            b.CallReleased();
             base.OnMouseUp(e);
         }
 
@@ -82,6 +91,15 @@ namespace Joystick {
 
         public void UpdateJoystickCentre() {
             defaultPos = Location;
+        }
+
+        public void Centre() {
+            active = false;
+            Location = defaultPos;
+            Location = defaultPos;
+            angle = 0;
+            distance = 0;
+            coords = new Point(0, 0);
         }
 
         int Distance(Point p1, Point p2) {
