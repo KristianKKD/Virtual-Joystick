@@ -19,9 +19,9 @@ namespace Joystick {
 
         public float maxDist = 63;
 
-        Back b;
+        JoyBack b;
 
-        public CentreStick(Back myBack) {
+        public CentreStick(JoyBack myBack) {
             b = myBack;
             this.Parent = b;
             this.DoubleBuffered = true;

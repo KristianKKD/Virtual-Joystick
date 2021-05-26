@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Back.cs">
+    <Compile Include="JoyBack.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CentreStick.cs">

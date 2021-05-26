@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Joystick {
-    public class Back : PictureBox {
+    public class JoyBack : PictureBox {
 
         public CentreStick Joystick;
         public event EventHandler JoyReleased;
 
-        public Back() {
+        public JoyBack() {
             this.DoubleBuffered = true;
             Size s = new Size(150, 150);
             this.MaximumSize = s;
